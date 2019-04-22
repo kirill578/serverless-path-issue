@@ -1,0 +1,22 @@
+service: this-is-the-name-of-the-service
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    host: 0.0.0.0
+    port: 3000
+
+provider:
+  name: aws
+  runtime: ${file(config/all.yml):runtime}
+
+functions:
+  hello:
+    handler: main.lambda
+    events:
+      - http:
+          method: get
+          path: hello
+          integration: lambda
